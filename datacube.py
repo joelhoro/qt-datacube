@@ -1,7 +1,7 @@
 import PyQt5.QtWidgets as qt
 import sys, pandas as pd
-from dataset import pivot_dataset
-from datacube_ui import Ui_riskViewer
+from data.dataset import pivot_dataset
+from ui.datacube_ui import Ui_riskViewer
 
 class Node:
     def __init__(self,id, values):
@@ -64,7 +64,7 @@ formatters = {
         
 app = qt.QApplication([])
 
-sheet = open('style.css','r').read()
+sheet = open('ui/style.css','r').read()
 
 app.setStyleSheet(sheet)
 window = qt.QMainWindow()
