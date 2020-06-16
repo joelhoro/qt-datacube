@@ -74,10 +74,17 @@ def debug():
     a = 1
 
 
+settings_file = 'settings/settings.pkl'
+
 def load_settings():
-    with open('settings.pkl','rb') as f:
+    import os
+    if not os.path.exists(settings_file):
+        print("No settings saved")
+        return []
+
+    with open(settings_file,'rb') as f:
         settings = pickle.loads(f.read())
-    print("Loaded settings")
+    print("Loaded settings from ", settings_file)
     print(settings)
     return settings
 
@@ -86,9 +93,10 @@ def save_settings():
     for window in windows:
         settings.append(window.geometry())
 
+    print("Saving settings to ", settings_file)
     print(settings)
 
-    with open('settings.pkl','wb') as f:
+    with open(settings_file,'wb') as f:
         f.write(pickle.dumps(settings))
 
 
@@ -126,11 +134,14 @@ def new_window():
     return window
 
 settings = load_settings()
-for w in settings:
-    window = new_window()
-    #window.resize(w['size'])
-    window.setGeometry(w)
-    windows.append(window)
+if not len(settings):
+    windows.append(new_window())
+else:
+    for geometry in settings:
+        window = new_window()
+        #window.resize(w['size'])
+        window.setGeometry(geometry)
+        windows.append(window)
 
 #windows.append(new_window())
 #new_window()
