@@ -1,6 +1,6 @@
 import PyQt5.QtWidgets as qt
 import PyQt5.QtCore as qtcore
-
+import pickle
 import sys, pandas as pd
 from sample_data.dataset import countries
 from ui.datacube_ui import Ui_riskViewer
@@ -68,26 +68,70 @@ formatters = {
         
 app = qt.QApplication([])
 
-sheet = open('ui/style.css','r').read()
+windows = []
 
-app.setStyleSheet(sheet)
-window = qt.QMainWindow()
-layout = qt.QVBoxLayout(window)
-ui = Ui_riskViewer()
-ui.setupUi(window)
+def debug():
+    a = 1
 
 
-tw = ui.riskTree
-tw.setAlternatingRowColors(True)
-populatenode(root,df,columns)
-add_to_tree(tw,root)
+def load_settings():
+    with open('settings.pkl','rb') as f:
+        settings = pickle.loads(f.read())
+    print("Loaded settings")
+    print(settings)
+    return settings
 
-values_labels = [f'{agg}({col})' for col,agg in values]
-tw.setHeaderLabels([""] + values_labels)
-header = tw.header()
-header.setSectionResizeMode(qt.QHeaderView.ResizeToContents)
-header.setStretchLastSection(False)
-#header.setSectionResizeMode(5, qt.QHeaderView.Stretch)
+def save_settings():
+    settings = []
+    for window in windows:
+        settings.append(window.geometry())
 
-window.show()
+    print(settings)
+
+    with open('settings.pkl','wb') as f:
+        f.write(pickle.dumps(settings))
+
+
+def exit_app():
+    save_settings()
+    sys.exit(0)
+
+def new_window():
+    sheet = open('ui/style.css','r').read()
+    app.setStyleSheet(sheet)
+    window = qt.QMainWindow()
+    layout = qt.QVBoxLayout(window)
+    ui = Ui_riskViewer()
+    ui.setupUi(window)
+
+    ui.newWindowButton.clicked.connect(lambda: windows.append(new_window()))
+    ui.debugButton.clicked.connect(debug)
+    ui.saveSettingsButton.clicked.connect(save_settings)
+    ui.loadSettingsButton.clicked.connect(load_settings)
+    ui.exitButton.clicked.connect(exit_app)
+
+    tw = ui.riskTree
+    tw.setAlternatingRowColors(True)
+    populatenode(root,df,columns)
+    add_to_tree(tw,root)
+
+    values_labels = [f'{agg}({col})' for col,agg in values]
+    tw.setHeaderLabels([""] + values_labels)
+    header = tw.header()
+    header.setSectionResizeMode(qt.QHeaderView.ResizeToContents)
+    header.setStretchLastSection(False)
+    #header.setSectionResizeMode(5, qt.QHeaderView.Stretch)
+
+    window.show()
+    return window
+
+settings = load_settings()
+for w in settings:
+    window = new_window()
+    #window.resize(w['size'])
+    window.setGeometry(w)
+    windows.append(window)
+
+#windows.append(new_window())
+#new_window()
 sys.exit(app.exec_())

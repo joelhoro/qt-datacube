@@ -20,7 +20,7 @@
       <x>0</x>
       <y>0</y>
       <width>1061</width>
-      <height>701</height>
+      <height>661</height>
      </rect>
     </property>
     <column>
@@ -28,6 +28,102 @@
       <string notr="true">1</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </column>
+    <item>
+     <property name="text">
+      <string>New Item</string>
+     </property>
+     <property name="text">
+      <string>asdf</string>
+     </property>
+     <property name="background">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>86</red>
+        <green>113</green>
+        <blue>213</blue>
+       </color>
+      </brush>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>240</red>
+        <green>42</green>
+        <blue>7</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="newWindowButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>670</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>New window</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="debugButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>670</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Debug</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saveSettingsButton">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>670</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save settings</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="loadSettingsButton">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>670</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load settings</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exitButton">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>670</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Exit</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -39,6 +135,12 @@
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuNew_window">
+    <property name="title">
+     <string>New window</string>
+    </property>
+   </widget>
+   <addaction name="menuNew_window"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
