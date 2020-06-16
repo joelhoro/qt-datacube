@@ -2,7 +2,7 @@ import PyQt5.QtWidgets as qt
 import PyQt5.QtCore as qtcore
 
 import sys, pandas as pd
-from data.dataset import pivot_dataset
+from sample_data.dataset import countries
 from ui.datacube_ui import Ui_riskViewer
 
 class Node:
@@ -52,7 +52,7 @@ def add_to_tree(qtw,node):
         add_to_tree(child_node,child)
 
 
-df = pd.DataFrame(pivot_dataset)
+df = pd.DataFrame(countries)
 print(df)
 root = Node('root', [])
 
