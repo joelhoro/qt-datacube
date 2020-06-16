@@ -1,0 +1,3 @@
+QTreeWidget::item, QTreeWidget::item:selected {
+    text-align: right;
+}

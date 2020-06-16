@@ -1,0 +1,6 @@
+ui/**.py
+venv/**
+junk/**
+.ipynb*/*
+.vscode/.ropeproject
+__pycache__/
