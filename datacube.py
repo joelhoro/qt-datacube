@@ -1,4 +1,6 @@
 import PyQt5.QtWidgets as qt
+import PyQt5.QtCore as qtcore
+
 import sys, pandas as pd
 from data.dataset import pivot_dataset
 from ui.datacube_ui import Ui_riskViewer
@@ -44,6 +46,8 @@ def add_to_tree(qtw,node):
             formatted_values.append(str(value))
 
         child_node = qt.QTreeWidgetItem(qtw,formatted_values)
+        for i,_ in enumerate(values):
+            child_node.setData(i+1,qtcore.Qt.TextAlignmentRole, qtcore.Qt.AlignRight)
         #child_node.setProperty('class','red')
         add_to_tree(child_node,child)
 
