@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\Joel\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
+    "python.pythonPath": "venv\\Scripts\\python.exe",
     "git.ignoreLimitWarning": true
 }
